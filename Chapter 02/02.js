@@ -18,7 +18,7 @@ $(document).ready(function () {
   $('a').filter(function () {
     return this.hostname && this.hostname != location.hostname;
   }).addClass('external');
-  
+
   $('#selected-plays > li > ul > li').addClass('special');
   // $("td:nth-child(3)").addClass("year");
   $('tr').find('td:eq(2)').addClass('year');
