@@ -6,12 +6,14 @@
 // See README.txt for more information.
 $(document).ready(function () {
   $('#switcher-default').addClass('selected');
-  $('#switcher button').click(function (event) {
-    var bodyClass = this.id.split('-')[1];
-    $('body').removeClass().addClass(bodyClass);
-    $('#switcher button').removeClass('selected');
-    $(this).addClass('selected');
-    event.stopPropagation();
+  $('#switcher').click(function (event) {
+    if ($(event.target).is('button')) {
+      var bodyClass = event.target.id.split('-')[1];
+      $('body').removeClass().addClass(bodyClass);
+      $('#switcher button').removeClass('selected');
+      $(this).addClass('selected');
+      event.stopPropagation();
+    }
   });
 
   $('#switcher').click(function (event) {
