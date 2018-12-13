@@ -13,8 +13,10 @@ $(document).ready(function () {
     $(this).addClass('selected');
   });
 
-  $('#switcher h3').click(function () {
-    $('#switcher button').toggleClass('hidden');
+  $('#switcher').click(function (event) {
+    if (event.target == this) {
+      $('#switcher button').toggleClass('hidden');
+    }
   });
 
   $('#switcher h3').hover(function () {
