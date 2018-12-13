@@ -12,4 +12,8 @@ $(document).ready(function () {
     $('#switcher button').removeClass('selected');
     $(this).addClass('selected');
   });
+
+  $('#switcher h3').click(function () {
+    $('#switcher button').toggleClass('hidden');
+  });
 });
