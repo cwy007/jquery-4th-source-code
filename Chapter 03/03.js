@@ -6,7 +6,7 @@
 // See README.txt for more information.
 $(document).ready(function () {
   $('#switcher-default').addClass('selected');
-  $('#switcher button').on('click', function () {
+  $('#switcher button').click(function () {
     var bodyClass = this.id.split('-')[1];
     $('body').removeClass().addClass(bodyClass);
     $('#switcher button').removeClass('selected');
