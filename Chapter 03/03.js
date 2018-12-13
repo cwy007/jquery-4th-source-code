@@ -11,16 +11,13 @@ $(document).ready(function () {
       var bodyClass = event.target.id.split('-')[1];
       $('body').removeClass().addClass(bodyClass);
       $('#switcher button').removeClass('selected');
-      $(this).addClass('selected');
-      event.stopPropagation();
+      $(event.target).addClass('selected');
+    } else {
+      $('#switcher button').toggleClass('hidden');
     }
   });
 
-  $('#switcher').click(function (event) {
-    $('#switcher button').toggleClass('hidden');
-  });
-
-  $('#switcher h3').hover(function () {
+  $('#switcher').hover(function () {
     $(this).addClass('hover');
   }, function () {
     $(this).removeClass('hover');
