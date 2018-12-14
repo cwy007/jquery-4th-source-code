@@ -73,7 +73,7 @@ $(document).ready(function () {
   // 02
   $('.chapter-title').click(function () {
     $(this).siblings('p').toggleClass('hidden');
-    console.log($(this).siblings('p'));
+    // console.log($(this).siblings('p'));
   })
 
   // 03
@@ -86,4 +86,9 @@ $(document).ready(function () {
       setBodyClass(bodyClasses[count % 3]);
     }
   });
+
+  // 04
+  $('p').mousemove(function (event) {
+    console.log(event.pageX, event.pageY);
+  })
 });
