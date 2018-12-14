@@ -30,5 +30,5 @@ $(document).ready(function () {
     }
   });
 
-  $('#switcher').trigger('click');
+  $('#switcher').click();
 });
