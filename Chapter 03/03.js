@@ -29,4 +29,6 @@ $(document).ready(function () {
       $('#switcher').on('click', toggleSwitcher);
     }
   });
+
+  $('#switcher').trigger('click');
 });
