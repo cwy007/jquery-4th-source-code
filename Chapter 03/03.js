@@ -4,22 +4,29 @@
 // page or follow along with the examples in the book.
 //
 // See README.txt for more information.
-$(document).ready(function () {
-  $('#switcher-default').addClass('selected');
-  $('#switcher').click(function (event) {
-    if ($(event.target).is('button')) {
-      var bodyClass = event.target.id.split('-')[1];
-      $('body').removeClass().addClass(bodyClass);
-      $('#switcher button').removeClass('selected');
-      $(event.target).addClass('selected');
-    } else {
-      $('#switcher button').toggleClass('hidden');
-    }
-  });
 
+$(document).ready(function () {
+  // Enable hover effect on the style switcher
   $('#switcher').hover(function () {
     $(this).addClass('hover');
   }, function () {
     $(this).removeClass('hover');
+  });
+
+  // Allow the style switcher to expand and collapse.
+  var toggleSwitcher = function (event) {
+    if (!$(event.target).is('button')) {
+      $('#switcher button').toggleClass('hidden');
+      console.log('aa');
+    };
+  };
+
+  $('#switcher').on('click', toggleSwitcher);
+
+  $('#switcher button').click(function () {
+    $('#switcher').off('click', toggleSwitcher);
+    if (this.id == 'switcher-default') {
+      $('#switcher').on('click', toggleSwitcher);
+    }
   });
 });
