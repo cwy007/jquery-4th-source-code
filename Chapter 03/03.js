@@ -65,8 +65,25 @@ $(document).ready(function () {
     }
   });
 
-  // 练习
+  // 练习: 01
   $('.author').click(function () {
     $(this).toggleClass('selected');
   })
+
+  // 02
+  $('.chapter-title').click(function () {
+    $(this).siblings('p').toggleClass('hidden');
+    console.log($(this).siblings('p'));
+  })
+
+  // 03
+  var bodyClasses = Object.values(triggers);
+  var count = 0; //设置一个计数器
+  $(document).keyup(function (event) {
+    // console.log(event);
+    if (event.keyCode == 39) {
+      count++;
+      setBodyClass(bodyClasses[count % 3]);
+    }
+  });
 });
