@@ -64,4 +64,9 @@ $(document).ready(function () {
       $('#switcher-' + triggers[key]).click();
     }
   });
+
+  // 练习
+  $('.author').click(function () {
+    $(this).toggleClass('selected');
+  })
 });
