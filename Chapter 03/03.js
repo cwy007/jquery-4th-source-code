@@ -17,11 +17,12 @@ $(document).ready(function () {
   var toggleSwitcher = function (event) {
     if (!$(event.target).is('button')) {
       $('#switcher button').toggleClass('hidden');
-      console.log('aa');
+      // console.log('aa');
     };
   };
 
   $('#switcher').on('click', toggleSwitcher);
+  $('#switcher').click();
 
   $('#switcher button').click(function () {
     $('#switcher').off('click', toggleSwitcher);
@@ -30,5 +31,37 @@ $(document).ready(function () {
     }
   });
 
-  $('#switcher').click();
+  var setBodyClass = function (className) {
+    $('body').removeClass().addClass(className);
+    $('#switcher button').removeClass('selected');
+    $('#switcher-' + className).addClass('selected');
+    $('#switcher').off('click', toggleSwitcher);
+    if (className == 'default') {
+      $('#switcher').on('click', toggleSwitcher);
+    }
+  };
+
+  $('#switcher-default').addClass('selected');
+
+  var triggers = {
+    D: 'default',
+    N: 'narrow',
+    L: 'large'
+  };
+
+  // 事件委托
+  $('#switcher').click(function (event) {
+    if ($(event.target).is('button')) {
+      var bodyClass = event.target.id.split('-')[1];
+      setBodyClass(bodyClass);
+    }
+  });
+
+  $(document).keyup(function (event) {
+    var key = String.fromCharCode(event.which);
+    // console.log(key);
+    if (key in triggers) {
+      $('#switcher-' + triggers[key]).click();
+    }
+  });
 });
