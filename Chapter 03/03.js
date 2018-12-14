@@ -91,4 +91,20 @@ $(document).ready(function () {
   $('p').mousemove(function (event) {
     console.log(event.pageX, event.pageY);
   })
+
+  // 05
+  var posx_down, posx_up, posy_down, posy_up;
+  $(document).mousedown(function (event) {
+    posx_down = event.clientX;
+    posy_down = event.clientY;
+  })
+  $(document).mouseup(function (event) {
+    posx_up = event.clientX;
+    posy_up = event.clientY;
+    if (posx_down == posx_up && posy_down == posy_up) {
+      $("p").addClass("hidden");
+    } else if (posy_down < posy_up) {
+      $("p").removeClass("hidden");
+    }
+  })
 });
