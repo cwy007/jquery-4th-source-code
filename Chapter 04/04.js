@@ -27,12 +27,12 @@ $(document).ready(function () {
   $secondPara.hide();
   $('a.more').click(function (event) {
     event.preventDefault();
-    if ($secondPara.is(':hidden')) {
-      $secondPara.fadeIn('slow');
-      $(this).text('read less');
+    $secondPara.slideToggle('slow');
+    var $link = $(this);
+    if ($link.text() == 'read more') {
+      $link.text('read less');
     } else {
-      $secondPara.fadeOut('slow');
-      $(this).text('read more');
+      $link.text('read more');
     }
   });
 });
