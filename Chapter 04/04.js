@@ -23,10 +23,16 @@ $(document).ready(function () {
     $speech.css('fontSize', num + 'px');
   });
 
-  $('p').eq(1).hide();
+  var $secondPara = $('p').eq(1);
+  $secondPara.hide();
   $('a.more').click(function (event) {
     event.preventDefault();
-    $('p').eq(1).slideDown('slow');
-    $(this).hide();
+    if ($secondPara.is(':hidden')) {
+      $secondPara.fadeIn('slow');
+      $(this).text('read less');
+    } else {
+      $secondPara.fadeOut('slow');
+      $(this).text('read more');
+    }
   });
 });
