@@ -13,7 +13,7 @@ $(document).ready(function () {
     switch (this.id) {
       case 'switcher-large':
         num *= 1.4;
-        break;
+        break; // 没有 break 时，会一直执行到 switch 语句的结尾
       case 'switcher-small':
         num /= 1.4;
         break;
@@ -21,5 +21,12 @@ $(document).ready(function () {
         num = parseFloat(defaultSize);
     }
     $speech.css('fontSize', num + 'px');
+  });
+
+  $('p').eq(1).hide();
+  $('a.more').click(function (event) {
+    event.preventDefault();
+    $('p').eq(1).show();
+    $(this).hide();
   });
 });
