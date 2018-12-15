@@ -26,7 +26,7 @@ $(document).ready(function () {
   $('p').eq(1).hide();
   $('a.more').click(function (event) {
     event.preventDefault();
-    $('p').eq(1).show();
+    $('p').eq(1).show('slow');
     $(this).hide();
   });
 });
