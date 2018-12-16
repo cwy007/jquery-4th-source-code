@@ -46,7 +46,9 @@ $(document).ready(function () {
     var paraWidth = $('div.speech p').outerWidth();
     var $switcher = $(this).parent();
     var switcherWidth = $switcher.outerWidth();
-    $switcher.animate({
+    $switcher.css({
+      position: 'relative'
+    }).animate({
       borderWidth: '5px',
       left: paraWidth - switcherWidth,
       height: '+=20px'
