@@ -57,6 +57,11 @@ $(document).ready(function () {
         })
       .fadeTo('slow', 1.0)
       .slideUp('slow')
+      .queue(function (next) {
+        $switcher.css({ backgroundColor: '#f00' });
+        next();
+      })
+      .css({ backgroundColor: '#f00' })
       .slideDown('slow')
   });
 });
