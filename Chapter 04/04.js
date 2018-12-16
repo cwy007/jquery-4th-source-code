@@ -75,4 +75,15 @@ $(document).ready(function () {
       });
     });
   $('p').eq(3).css('backgroundColor', '#ccc').hide();
+
+  // 01
+  $('body').fadeIn(2000);
+
+  // 02
+  $('p').hover(function () {
+    oldBackgroundColor = $(this).css('backgroundColor');
+    $(this).css({ backgroundColor: 'yellow' })
+  }, function () {
+    $(this).css({ backgroundColor: oldBackgroundColor })
+  });
 });
