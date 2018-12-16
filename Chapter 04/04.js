@@ -56,19 +56,23 @@ $(document).ready(function () {
           queue: false
         })
       .fadeTo('slow', 1.0)
-      .slideUp('slow')
-      .queue(function (next) {
+      .slideUp('slow', function () {
         $switcher.css({ backgroundColor: '#f00' });
-        next();
       })
-      .css({ backgroundColor: '#f00' })
-      .slideDown('slow')
+      .slideDown('slow');
   });
+  // .queue(function (next) {
+  //   $switcher.css({ backgroundColor: '#f00' });
+  //   next();
+  // })
 
   $('p').eq(2)
     .css('border', '1px solid #333')
     .click(function () {
-      $(this).slideUp('slow').next().slideDown('slow');
+      var $clickedItem = $(this);
+      $(this).next().slideDown('slow', function () {
+        $clickedItem.slideUp('slow');
+      });
     });
   $('p').eq(3).css('backgroundColor', '#ccc').hide();
 });
