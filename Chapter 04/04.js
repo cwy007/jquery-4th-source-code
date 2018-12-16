@@ -86,4 +86,44 @@ $(document).ready(function () {
   }, function () {
     $(this).css({ backgroundColor: oldBackgroundColor })
   });
+
+  // 3
+  $('h2').click(function () {
+    $(this).animate({
+      opacity: .25,
+      marginLeft: '+=20px'
+    }, 'slow', function () {
+      $('div.speech').animate({
+        opacity: .5
+      }, 'slow');
+    });
+  });
+
+  // 4
+  $(document).keyup(function (event) {
+    var $switcher = $('#switcher');
+    switch (event.which) {
+      case 37:
+        $switcher.css('position', 'relative').filter(':not(:animated)').animate({
+          left: '-=20px'
+        }, 'fast');
+        break;
+      case 38:
+        $switcher.css('position', 'relative').filter(':not(:animated)').animate({
+          top: '-=20px'
+        }, 'fast');
+        break;
+      case 39:
+        $switcher.css('position', 'relative').filter(':not(:animated)').animate({
+          left: '+=20px'
+        }, 'fast');
+        break;
+      case 40:
+        $switcher.css('position', 'relative').filter(':not(:animated)').animate({
+          top: '+=20px'
+        }, 'fast');
+        break;
+      default:
+    }
+  });
 });
