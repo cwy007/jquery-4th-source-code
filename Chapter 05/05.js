@@ -19,8 +19,9 @@ $(document).ready(function () {
   $('<a href="#top">back to top</a>').insertAfter('div.chapter p');
   $('<a id="top"></a>').prependTo('body');
 
-  $('span.footnote')
-    .insertBefore('#footer')
-    .wrapAll('<ol id="notes"></ol>')
-    .wrap('<li></li>');
+  $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
+  $('span.footnote').each(function (index) {
+    $('<sup>' + (index + 1) + '</sup>').insertBefore(this); // 先标记，然后，移动元素
+    $(this).appendTo($notes).wrap('<li></li>');
+  });
 });
