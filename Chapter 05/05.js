@@ -33,6 +33,11 @@ $(document).ready(function () {
         '</sup></a>'
       ].join(''))
       .appendTo($notes)
-      .wrap('<li></li>');
+      .append([
+        '&nbsp;(<a href="#context-',
+        index + 1,
+        '">context</a>)'
+      ].join(''))
+      .wrap('<li id="footnote-' + (index + 1) + '"></li>');
   });
 });
