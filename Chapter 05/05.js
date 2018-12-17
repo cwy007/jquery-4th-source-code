@@ -45,6 +45,11 @@ $(document).ready(function () {
     var $parentParagraph = $(this).parent('p');
     $parentParagraph.css('position', 'relative');
     var $cloneCopy = $(this).clone();
-    $cloneCopy.addClass('pulled').prependTo($parentParagraph);
+    $cloneCopy
+      .addClass('pulled')
+      .find('span.drop')
+      .html('&hellip;') // html() 方法有参数时，会替换元素的内容
+      .end()            // end() 方法，重新返回元素集合
+      .prependTo($parentParagraph);
   });
 });
