@@ -50,6 +50,7 @@ $(document).ready(function () {
       .find('span.drop')
       .html('&hellip;') // html() 方法有参数时，会替换元素的内容
       .end()            // end() 方法，重新返回元素集合
+      .text($cloneCopy.text())
       .prependTo($parentParagraph);
   });
 });
