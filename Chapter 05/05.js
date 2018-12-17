@@ -22,7 +22,16 @@ $(document).ready(function () {
   $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
   $('span.footnote').each(function (index) {
     $(this)
-      .before('<sup>' + (index + 1) + '</sup>')
+      .before([
+        '<a href="#footnote-',
+        index + 1,
+        '" id="context-',
+        index + 1,
+        '" class="context">',
+        '<sup>',
+        index + 1,
+        '</sup></a>'
+      ].join(''))
       .appendTo($notes)
       .wrap('<li></li>');
   });
