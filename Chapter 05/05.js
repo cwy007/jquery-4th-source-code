@@ -40,4 +40,11 @@ $(document).ready(function () {
       ].join(''))
       .wrap('<li id="footnote-' + (index + 1) + '"></li>');
   });
+
+  $('span.pull-quote').each(function (index) {
+    var $parentParagraph = $(this).parent('p');
+    $parentParagraph.css('position', 'relative');
+    var $cloneCopy = $(this).clone();
+    $cloneCopy.addClass('pulled').prependTo($parentParagraph);
+  });
 });
