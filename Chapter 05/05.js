@@ -19,5 +19,8 @@ $(document).ready(function () {
   $('<a href="#top">back to top</a>').insertAfter('div.chapter p');
   $('<a id="top"></a>').prependTo('body');
 
-  $('span.footnote').insertBefore('#footer');
+  $('span.footnote')
+    .insertBefore('#footer')
+    .wrapAll('<ol id="notes"></ol>')
+    .wrap('<li></li>');
 });
