@@ -21,7 +21,9 @@ $(document).ready(function () {
 
   $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
   $('span.footnote').each(function (index) {
-    $('<sup>' + (index + 1) + '</sup>').insertBefore(this); // 先标记，然后，移动元素
-    $(this).appendTo($notes).wrap('<li></li>');
+    $(this)
+      .before('<sup>' + (index + 1) + '</sup>')
+      .appendTo($notes)
+      .wrap('<li></li>');
   });
 });
