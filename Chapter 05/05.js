@@ -6,8 +6,11 @@
 // See README.txt for more information.
 
 $(document).ready(function () {
-  $('div.chapter a').attr({
+  $('div.chapter a[href*="wikipedia"]').attr({
     rel: 'external',
-    title: 'Learn more at Wikipedia'
+    title: 'Learn more at Wikipedia',
+    id: function (index, _oldValue) {
+      return 'wikilink-' + index;
+    }
   });
 });
