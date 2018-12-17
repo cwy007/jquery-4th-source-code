@@ -4,3 +4,10 @@
 // page or follow along with the examples in the book.
 //
 // See README.txt for more information.
+
+$(document).ready(function () {
+  $('div.chapter a').attr({
+    rel: 'external',
+    title: 'Learn more at Wikipedia'
+  });
+});
