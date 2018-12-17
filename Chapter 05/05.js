@@ -8,7 +8,9 @@
 $(document).ready(function () {
   $('div.chapter a[href*="wikipedia"]').attr({
     rel: 'external',
-    title: 'Learn more at Wikipedia',
+    title: function () {
+      return 'Learn more about ' + $(this).text() + ' at Wikipedia.';
+    },
     id: function (index, _oldValue) {
       return 'wikilink-' + index;
     }
