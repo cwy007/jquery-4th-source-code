@@ -22,8 +22,21 @@ $(document).ready(function () {
   // 01
   $('div.chapter p').each(function (index) {
     if (index >= 3) {
-      $(this).after('<a id="top">back to top</a>');
+      $(this).after('<a href="#top">back to top</a>');
     }
+  });
+  $('<a id="top"></a>').prependTo('body');
+
+  // 02
+  $('a[href*="#top"]').click(function (event) {
+    // console.log(event.target);
+    var clickedLink = event.target;
+    $('.scrollLocationTip').remove();
+    $('<p class=\"scrollLocationTip\">you were here</p>').insertAfter(clickedLink);
+    event.stopPropagation();
+  });
+  $('body').click(function (event) {
+    $('.scrollLocationTip').remove();
   });
 
   $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
