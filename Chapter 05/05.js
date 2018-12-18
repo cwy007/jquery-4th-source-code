@@ -39,6 +39,13 @@ $(document).ready(function () {
     $('.scrollLocationTip').remove();
   });
 
+  // 03
+  $('#f-author').click(function (event) {
+    // console.log(this);
+    $(this).html('<b>' + $(this).text() + '</b>');
+    // console.log(event.target);
+  });
+
   $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
   $('span.footnote').each(function (index) {
     $(this)
