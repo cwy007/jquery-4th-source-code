@@ -41,9 +41,13 @@ $(document).ready(function () {
 
   // 03
   $('#f-author').click(function (event) {
-    // console.log(this);
-    $(this).html('<b>' + $(this).text() + '</b>');
-    // console.log(event.target);
+    if ($(this).children('strong').length == 0) {
+      // wrapInner()，不改变外部的 DOM 结构
+      // 判断 length 的目的是，防止多次 wrapInner()
+      $(this).wrapInner('<strong></strong>');
+    } else {
+      $(this).children('strong').contents().unwrap('<strong></strong>');
+    }
   });
 
   $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
