@@ -16,8 +16,15 @@ $(document).ready(function () {
     }
   });
 
-  $('<a href="#top">back to top</a>').insertAfter('div.chapter p');
-  $('<a id="top"></a>').prependTo('body');
+  // $('<a href="#top">back to top</a>').insertAfter('div.chapter p');
+  // $('<a id="top"></a>').prependTo('body');
+
+  // 01
+  $('div.chapter p').each(function (index) {
+    if (index >= 3) {
+      $(this).after('<a id="top">back to top</a>');
+    }
+  });
 
   $notes = $('<ol id="notes"></ol>').insertBefore('#footer');
   $('span.footnote').each(function (index) {
@@ -53,4 +60,5 @@ $(document).ready(function () {
       .text($cloneCopy.text())
       .prependTo($parentParagraph);
   });
+
 });
