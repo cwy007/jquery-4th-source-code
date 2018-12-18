@@ -39,7 +39,7 @@ $(document).ready(function () {
     $('.scrollLocationTip').remove();
   });
 
-  // 03
+  // 03, 04
   $('#f-author').click(function (event) {
     if ($(this).children('strong').length == 0) {
       // wrapInner()，不改变外部的 DOM 结构
@@ -47,6 +47,13 @@ $(document).ready(function () {
       $(this).wrapInner('<strong></strong>');
     } else {
       $(this).children('strong').contents().unwrap('<strong></strong>');
+    }
+  });
+
+  // 05
+  $('div.chapter p').each(function () {
+    if (!$(this).hasClass('inhabitants')) {
+      this.className += ' inhabitants'
     }
   });
 
@@ -84,5 +91,4 @@ $(document).ready(function () {
       .text($cloneCopy.text())
       .prependTo($parentParagraph);
   });
-
 });
