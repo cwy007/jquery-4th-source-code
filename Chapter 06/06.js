@@ -22,6 +22,16 @@ $(document).ready(function () {
         html += '<div class="part">' + entry.part + '</div>';
         html += '<div class="definition">';
         html += entry.definition;
+        if (entry.quote) {
+          html += '<div class="quote">';
+          $.each(entry.quote, function (_lineIndex, line) {
+            html += '<div class="quote-line">' + line + '</div>';
+          });
+          if (entry.author) {
+            html += '<div class="quote-author">' + entry.author + '</div>';
+          }
+          html += '</div>';
+        }
         html += '</div>';
         html += '</div>';
       });
