@@ -102,4 +102,20 @@ $(document).ready(function () {
   }, function () {
     $('#dictionary').html('');
   });
+
+  // 04
+  var repoURL = 'https://api.github.com/users/cwy007/repos';
+  $.getJSON(repoURL + '?callback=?', function (response) {
+    // console.log(response);
+
+    var html = '';
+    $.each(response.data, function (_entryIndex, entry) {
+      html += '<div class=\"entry\">';
+      //给内容加上 term、part 类，是为了直接使用样式表中的样式
+      html += '<div class=\"repoName term\">' + entry.name + '</div>';
+      html += '<div class=\"repoURL part\">' + '<a href=\"' + entry.url + '\">' + entry.url + '</a>' + '</div>';
+      html += '</div>';
+    });
+    $('#dictionary').html(html);
+  });
 });
