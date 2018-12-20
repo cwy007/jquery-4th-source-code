@@ -14,4 +14,16 @@ $(document).ready(function () {
     speed: 200,
     pause: true
   });
+
+  var $books = $('#books');
+  var $controls = $('<div id="books-controls"></div>');
+  $controls.insertAfter($books);
+  $('<button>Pause</button>').click(function (event) {
+    event.preventDefault();
+    $books.cycle('pause');
+  }).appendTo($controls);
+  $('<button>Resume</button>').click(function (event) {
+    event.preventDefault();
+    $books.cycle('resume');
+  }).appendTo($controls);
 });
