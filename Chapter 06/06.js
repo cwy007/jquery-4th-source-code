@@ -76,4 +76,30 @@ $(document).ready(function () {
       });
     });
   });
+
+  // 01
+  // $('#dictionary').load('exercises-content.html .letter');
+
+  // 02
+  // $('.letter').hover(function () {
+  //   $('#dictionary').load('exercises-content.html #' + $(this).attr('id'));
+  // }, function () {
+  //   $('#dictionary').html('');
+  // });
+
+  // 03
+  $('.letter').hover(function () {
+    $('#dictionary').load('does-not-exist.html #' + $(this).attr('id'), function (_response, status, xhr) {
+      // console.log(_response);
+      // console.log(status);
+      if (status === 'error') {
+        $('#dictionary').html('错误：' + xhr.status).append(xhr.responseText);
+        // console.log(xhr);
+      } else {
+        $('#dictonary').html(xhr.responseText);
+      }
+    });
+  }, function () {
+    $('#dictionary').html('');
+  });
 });
