@@ -24,6 +24,6 @@ $(document).ready(function () {
   }).appendTo($controls);
   $('<button>Resume</button>').click(function (event) {
     event.preventDefault();
-    $books.cycle('resume');
+    $('ul:paused').cycle('resume');
   }).appendTo($controls);
 });
