@@ -4,3 +4,11 @@
 // page or follow along with the examples in the book.
 //
 // See README.txt for more information.
+
+$(document).ready(function () {
+  $('#books').cycle({
+    timeout: 2000,
+    speed: 200,
+    pause: true
+  });
+});
