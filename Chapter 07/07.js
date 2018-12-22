@@ -47,6 +47,6 @@ $(document).ready(function () {
   });
 
   $('h1').click(function () {
-    $(this).toggleClass('highlighted', 'slow');
+    $(this).toggleClass('highlighted', 'slow', 'easeInExpo');
   });
 });
