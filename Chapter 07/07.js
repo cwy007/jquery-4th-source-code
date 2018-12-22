@@ -49,4 +49,16 @@ $(document).ready(function () {
   $('h1').click(function () {
     $(this).toggleClass('highlighted', 'slow', 'easeInExpo');
   });
+
+  $('<button>Resume</button>').click(function () {
+    event.preventDefault();
+    var $paused = $('ul:paused');
+    if ($paused.length) {
+      $paused.cycle('resume');
+    } else {
+      $(this).effect('shake', {
+        distance: 10
+      });
+    }
+  }).appendTo($controls);
 });
