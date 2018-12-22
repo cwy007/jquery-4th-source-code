@@ -65,4 +65,21 @@ $(document).ready(function () {
   $books.find('.title').resizable({
     handles: 's'
   });
+
+  $('button').button();
+
+  $('<button>Pause</button>').click(function (event) {
+    // ...
+  }).button({
+    icons: {
+      primary: 'ui-icon-pause'
+    }
+  }).appendTo($controls);
+  $('<button>Resume</button>').click(function (event) {
+    // ...
+  }).button({
+    icons: {
+      primary: 'ui-icon-play'
+    }
+  }).appendTo($controls);
 });
