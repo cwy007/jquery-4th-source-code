@@ -61,4 +61,8 @@ $(document).ready(function () {
       });
     }
   }).appendTo($controls);
+
+  $books.find('.title').resizable({
+    handles: 's'
+  });
 });
