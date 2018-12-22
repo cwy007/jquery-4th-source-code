@@ -45,4 +45,8 @@ $(document).ready(function () {
       color: '#fff'
     }, 1000);
   });
+
+  $('h1').click(function () {
+    $(this).toggleClass('highlighted', 'slow');
+  });
 });
