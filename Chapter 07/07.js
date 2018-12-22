@@ -12,7 +12,10 @@ $(document).ready(function () {
   $('#books').cycle({
     timeout: 2000,
     speed: 200,
-    pause: true
+    pause: true,
+    before: function () {
+      $('#slider').slider('value', $('#books li').index(this));
+    }
   });
 
   var $books = $('#books');
@@ -80,6 +83,14 @@ $(document).ready(function () {
   }).button({
     icons: {
       primary: 'ui-icon-play'
+    }
+  }).appendTo($controls);
+
+  $('<div id="slider"></div>').slider({
+    min: 0,
+    max: $('#books li').length - 1,
+    slide: function (event, ui) {
+      $books.cycle(ui.value);
     }
   }).appendTo($controls);
 });
