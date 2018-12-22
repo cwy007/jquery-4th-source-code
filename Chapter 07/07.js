@@ -21,9 +21,28 @@ $(document).ready(function () {
   $('<button>Pause</button>').click(function (event) {
     event.preventDefault();
     $books.cycle('pause');
+    $.cookie('cyclePaused', 'y');
+    // console.log($.cookie('cyclePaused'))
   }).appendTo($controls);
   $('<button>Resume</button>').click(function (event) {
     event.preventDefault();
     $('ul:paused').cycle('resume');
+    $.cookie('cyclePaused', null);
   }).appendTo($controls);
+
+  if ($.cookie('cyclePaused')) {
+    $books.cycle('pause');
+  }
+
+  $books.hover(function () {
+    $books.find('.title').animate({
+      backgroundColor: '#eee',
+      color: '#000'
+    }, 1000);
+  }, function () {
+    $books.find('.title').animate({
+      backgroundColor: '#000',
+      color: '#fff'
+    }, 1000);
+  });
 });
