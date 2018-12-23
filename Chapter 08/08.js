@@ -17,6 +17,13 @@
     });
     return total;
   };
+
+  $.average = function (array) {
+    if ($.isArray(array)) {
+      return $.sum(array) / array.length;
+    }
+    return '';
+  };
 })(jQuery);
 
 $(document).ready(function () {
