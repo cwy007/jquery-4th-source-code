@@ -37,4 +37,12 @@ $(document).ready(function () {
 
   var sum = $.sum(quantities);
   $('#sum').find('td:nth-child(2)').text(sum);
+
+  var prices = $inventory.find('td:nth-child(3)')
+    .map(function (index, qty) {
+      return $(qty).text();
+    }).get();
+
+  var average = $.average(prices);
+  $('#average').find('td:nth-child(3)').text(average.toFixed(2));
 });
