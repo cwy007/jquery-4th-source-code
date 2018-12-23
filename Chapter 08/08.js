@@ -10,13 +10,32 @@
   };
 
   $.fn.swapClass = function (class1, class2) {
-    this.each(function () {
+    return this.each(function () {
       var $element = $(this);
 
       if ($element.hasClass(class1)) {
         $element.removeClass(class1).addClass(class2);
       } else if ($element.hasClass(class2)) {
         $element.removeClass(class2).addClass(class1);
+      }
+    });
+  };
+
+  $.fn.shadow = function () {
+    return this.each(function () {
+      var $originalElement = $(this);
+      for (var i = 0; i < 5; i++) {
+        $originalElement
+          .clone()
+          .css({
+            position: 'absolute',
+            left: $originalElement.offset().left + i,
+            top: $originalElement.offset().top + i,
+            margin: 0,
+            zIndex: -1,
+            opacity: 0.1
+          })
+          .appendTo('body');
       }
     });
   };
@@ -47,4 +66,6 @@ $(document).ready(function () {
   $('table').click(function () {
     $('tr').swapClass('one', 'two');
   });
+
+  $('h1').shadow();
 });
