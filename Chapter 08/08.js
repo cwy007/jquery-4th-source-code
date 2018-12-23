@@ -21,7 +21,13 @@
     });
   };
 
-  $.fn.shadow = function (options) {
+  $.fn.shadow = function (opts) {
+    var defaults = {
+      copies: 5,
+      opacity: 0.1
+    };
+    var options = $.extend(defaults, opts);
+
     return this.each(function () {
       var $originalElement = $(this);
       for (var i = 0; i < options.copies; i++) {
