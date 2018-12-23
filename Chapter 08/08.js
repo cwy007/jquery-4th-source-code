@@ -4,9 +4,23 @@
 // page or follow along with the examples in the book.
 //
 // See README.txt for more information.
-jQuery.fn.myMethod = function () {
-  alert('Nothing happens.');
-};
+(function ($) {
+  $.fn.myMethod = function () {
+    alert('Nothing happens.');
+  };
+
+  $.fn.swapClass = function (class1, class2) {
+    this.each(function () {
+      var $element = $(this);
+
+      if ($element.hasClass(class1)) {
+        $element.removeClass(class1).addClass(class2);
+      } else if ($element.hasClass(class2)) {
+        $element.removeClass(class2).addClass(class1);
+      }
+    });
+  };
+})(jQuery);
 
 $(document).ready(function () {
   var $inventory = $('#inventory tbody');
@@ -28,5 +42,9 @@ $(document).ready(function () {
   var average = $.mathUtils.average(prices);
   $('#average').find('td:nth-child(3)').text(average.toFixed(2));
 
-  $('div').myMethod();
+  // $('div').myMethod();
+
+  $('table').click(function () {
+    $('tr').swapClass('one', 'two');
+  });
 });
