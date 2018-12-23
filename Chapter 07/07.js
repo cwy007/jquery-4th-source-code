@@ -13,6 +13,8 @@ $(document).ready(function () {
     timeout: 2000,
     speed: 200,
     pause: true,
+    fx: 'fade', // 添加这一行 01
+    nowrap: true,
     before: function () {
       $('#slider').slider('value', $('#books li').index(this));
     }
@@ -66,7 +68,8 @@ $(document).ready(function () {
   }).appendTo($controls);
 
   $books.find('.title').resizable({
-    handles: 's'
+    handles: 's',
+    grid: [10, 10] // 添加这一行 03
   });
 
   $('button').button();
@@ -89,8 +92,14 @@ $(document).ready(function () {
   $('<div id="slider"></div>').slider({
     min: 0,
     max: $('#books li').length - 1,
+    animate: true, // 04
     slide: function (event, ui) {
       $books.cycle(ui.value);
     }
   }).appendTo($controls);
+
+  // 02
+  $.cookie('cyclePaused', null, {
+    expires: 7
+  });
 });
