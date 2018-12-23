@@ -22,17 +22,7 @@
   };
 
   $.fn.shadow = function (opts) {
-    var defaults = {
-      copies: 5,
-      opacity: 0.1,
-      copyOffset: function (index) {
-        return {
-          x: index,
-          y: index
-        };
-      }
-    };
-    var options = $.extend(defaults, opts);
+    var options = $.extend({}, $.fn.shadow.defaults, opts);
 
     return this.each(function () {
       var $originalElement = $(this);
@@ -51,6 +41,17 @@
           .appendTo('body');
       }
     });
+  };
+
+  $.fn.shadow.defaults = {
+    copies: 5,
+    opacity: 0.1,
+    copyOffset: function (index) {
+      return {
+        x: index,
+        y: index
+      };
+    }
   };
 })(jQuery);
 
@@ -80,6 +81,7 @@ $(document).ready(function () {
     $('tr').swapClass('one', 'two');
   });
 
+  $.fn.shadow.defaults.copies = 10;
   $('h1').shadow({
     copyOffset: function (index) {
       return {
