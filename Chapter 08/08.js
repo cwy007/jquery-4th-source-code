@@ -5,27 +5,6 @@
 //
 // See README.txt for more information.
 
-(function ($) {
-  $.sum = function (array) {
-    var total = 0;
-
-    $.each(array, function (index, value) {
-      value = $.trim(value);
-      value = parseFloat(value) || 0;
-
-      total += value;
-    });
-    return total;
-  };
-
-  $.average = function (array) {
-    if ($.isArray(array)) {
-      return $.sum(array) / array.length;
-    }
-    return '';
-  };
-})(jQuery);
-
 $(document).ready(function () {
   var $inventory = $('#inventory tbody');
   var quantities = $inventory.find('td:nth-child(2)')
@@ -35,7 +14,7 @@ $(document).ready(function () {
   // console.log(quantities);
   // console.log(quantities.get());
 
-  var sum = $.sum(quantities);
+  var sum = $.mathUtils.sum(quantities);
   $('#sum').find('td:nth-child(2)').text(sum);
 
   var prices = $inventory.find('td:nth-child(3)')
@@ -43,6 +22,6 @@ $(document).ready(function () {
       return $(qty).text();
     }).get();
 
-  var average = $.average(prices);
+  var average = $.mathUtils.average(prices);
   $('#average').find('td:nth-child(3)').text(average.toFixed(2));
 });
