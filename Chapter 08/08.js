@@ -21,10 +21,10 @@
     });
   };
 
-  $.fn.shadow = function () {
+  $.fn.shadow = function (options) {
     return this.each(function () {
       var $originalElement = $(this);
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < options.copies; i++) {
         $originalElement
           .clone()
           .css({
@@ -33,7 +33,7 @@
             top: $originalElement.offset().top + i,
             margin: 0,
             zIndex: -1,
-            opacity: 0.1
+            opacity: options.opatity
           })
           .appendTo('body');
       }
@@ -67,5 +67,8 @@ $(document).ready(function () {
     $('tr').swapClass('one', 'two');
   });
 
-  $('h1').shadow();
+  $('h1').shadow({
+    copies: 3,
+    opacity: 0.25
+  });
 });
