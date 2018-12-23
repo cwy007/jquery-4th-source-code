@@ -4,6 +4,9 @@
 // page or follow along with the examples in the book.
 //
 // See README.txt for more information.
+jQuery.fn.myMethod = function () {
+  alert('Nothing happens.');
+};
 
 $(document).ready(function () {
   var $inventory = $('#inventory tbody');
@@ -24,4 +27,6 @@ $(document).ready(function () {
 
   var average = $.mathUtils.average(prices);
   $('#average').find('td:nth-child(3)').text(average.toFixed(2));
+
+  $('div').myMethod();
 });
