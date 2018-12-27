@@ -86,7 +86,7 @@ $(document).ready(function () {
     copyOffset: function (index) {
       return {
         x: -index,
-        y: -2 * index
+        y: index
       };
     }
   });

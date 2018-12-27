@@ -95,13 +95,13 @@
 (function($) {
   $.widget('ljq.tooltip', {
     _create: function() {
-      this._tooltipDiv = $('<div></div>')
+      this._tooltipDiv = $('<div></div>') // this 引用的是当前部件实例
         .addClass('ljq-tooltip-text ui-widget ui-state-highlight ui-corner-all')
         .hide().appendTo('body');
-      this.element
+      this.element     // 通过 this 为部件添加任何想要的属性；预定义属性 element 指向最初选择的元素
         .addClass('ljq-tooltip-trigger')
-        .on('mouseenter.ljq-tooltip', $.proxy(this._open, this))
-        .on('mouseleave.ljq-tooltip', $.proxy(this._close, this));
+        .on('mouseenter.ljq-tooltip', $.proxy(this._open, this)) // 事件处理程序
+        .on('mouseleave.ljq-tooltip', $.proxy(this._close, this)); // .ljq-tooltip 事件命名空间
     }
   });
 })(jQuery);
