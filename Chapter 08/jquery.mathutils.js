@@ -75,9 +75,9 @@
 })(jQuery);
 
 // 03
-(function($) {
+(function ($) {
   $.widget('ljq.tooltip', { // 命名空间的概念 ljq。tooltip 为组件名
-    _create: function() {
+    _create: function () {
       this._tooltipDiv = $('<div></div>')
         .addClass('ljq-tooltip-text ui-widget ui-state-highlight ui-corner-all')
         .hide().appendTo('body');
@@ -87,7 +87,15 @@
         .on('mouseleave.ljq-tooltip', $.proxy(this._close, this));
     },
 
-    _open: function() { // 内部方法或属性，以下划线开头
+    destroy: function () {
+      this._tooltipDiv.remove();
+      this.element
+        .removeClass('ljq-tooltip-trigger')
+        .off('.ljq-tooltip');
+      $.Widget.prototype.destroy.apply(this, arguments); // 调用保存在原型对象 prototype 中的 destroy 方法
+    },
+
+    _open: function () { // 内部方法或属性，以下划线开头
       var elementOffset = this.element.offset(); // offset() 会返回第一个匹配元素相对于 document 位移对象 { top: value1, left: value2 }
       this._tooltipDiv.css({
         position: 'absolute',
@@ -97,7 +105,7 @@
       this._tooltipDiv.show();
     },
 
-    _close: function() {
+    _close: function () {
       this._tooltipDiv.hide();
     }
   });
