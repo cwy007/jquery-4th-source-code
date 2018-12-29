@@ -8,9 +8,9 @@
 $(document).ready(function () {
   var $inventory = $('#inventory tbody');
   var quantities = $inventory.find('td:nth-child(2)')
-    .map(function (index, qty) {
-      return $(qty).text();
-    }).get();
+  .map(function (index, qty) {
+    return $(qty).text();
+  }).get();
   // console.log(quantities);
   // console.log(quantities.get());
 
@@ -18,9 +18,9 @@ $(document).ready(function () {
   $('#sum').find('td:nth-child(2)').text(sum);
 
   var prices = $inventory.find('td:nth-child(3)')
-    .map(function (index, qty) {
-      return $(qty).text();
-    }).get();
+  .map(function (index, qty) {
+    return $(qty).text();
+  }).get();
 
   var average = $.mathUtils.average(prices);
   $('#average').find('td:nth-child(3)').text(average.toFixed(2));
@@ -28,17 +28,17 @@ $(document).ready(function () {
   // $('div').myMethod();
 
   $('table').click(function () {
-    $('tr').swapClass('one', 'two');
+  $('tr').swapClass('one', 'two');
   });
 
   $.fn.shadow.defaults.copies = 10;
   $('h1').shadow({
-    copyOffset: function (index) {
-      return {
-        x: -index,
-        y: index
-      };
-    }
+  copyOffset: function (index) {
+    return {
+    x: -index,
+    y: index
+    };
+  }
   });
 
   // 自带组件 & 自定义组件
@@ -61,4 +61,10 @@ $(document).ready(function () {
   // $.fn.myPlugin.defaults = {}
   // var options = $.extend({}, $.fn.shadow.defaults, opts);
 
+  // 练习1 测试代码
+  $('#container h1').click(function () {
+    $('#inventory').slideFadeOut();
+    $('#inventory').slideFadeIn();
+  });
 });
+
