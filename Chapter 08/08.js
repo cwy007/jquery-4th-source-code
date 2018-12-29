@@ -73,5 +73,25 @@ $(document).ready(function () {
   $('a').on('tooltipopen', function() {
     console.log('tooltipopen event triggered');
   });
+
+  // 练习4 测试代码
+  $('a').tooltip({
+    content: function () {
+      var url = $(this).attr('href');
+      var result = null;
+      $.ajax({
+        url: url,
+        type: 'get',
+        dataType: 'html',
+        async: false,     // 默认值为 true
+        success: function (data, result, status) {
+          result = data;
+          console.log(result);
+          console.log(status);
+        }
+      });
+      return result;
+    }
+  });
 });
 
