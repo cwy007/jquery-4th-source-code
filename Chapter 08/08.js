@@ -45,7 +45,7 @@ $(document).ready(function () {
   // $('a').tooltip({offsetX: -10, offsetY: 25}); // 实例化
   $('a').tooltip().hover(function () {
     console.log('Is Tooltip Open? : ' + $(this).tooltip('isOpen').toString());
-  });; // 先实例化
+  });; // 先实例化  // 练习2 测试代码
   $('a').tooltip('option', 'offsetX', 20); // 实例化后访问 option
 
   $('a').tooltip('disable');  // 禁用
@@ -67,6 +67,11 @@ $(document).ready(function () {
   $('#container h1').click(function () {
     $('#inventory').slideFadeOut();
     $('#inventory').slideFadeIn();
+  });
+
+  // 练习3 测试代码
+  $('a').on('tooltipopen', function() {
+    console.log('tooltipopen event triggered');
   });
 });
 
