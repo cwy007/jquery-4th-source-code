@@ -89,6 +89,7 @@
     },
 
     _create: function () {
+      this.isTooltipOpen = false;
       this._tooltipDiv = $('<div></div>')
         .addClass('ljq-tooltip-text ui-widget ui-state-highlight ui-corner-all')
         .hide().appendTo('body');
@@ -124,12 +125,19 @@
         }).text(this.options.content.call(this.element[0]));
         this._tooltipDiv.show();
         this._trigger('open');
+        return this.isTooltipOpen = true;
       }
     },
 
     _close: function () {
       this._tooltipDiv.hide();
       this._trigger('close');
-    }
+      return this.isTooltipOpen = false;
+    },
+
+    // ========== 练习2
+    isOpen: function () {
+      return this.isTooltipOpen;
+    },
   });
 })(jQuery);

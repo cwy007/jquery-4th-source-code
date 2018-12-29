@@ -43,7 +43,9 @@ $(document).ready(function () {
 
   // 自带组件 & 自定义组件
   // $('a').tooltip({offsetX: -10, offsetY: 25}); // 实例化
-  $('a').tooltip(); // 先实例化
+  $('a').tooltip().hover(function () {
+    console.log('Is Tooltip Open? : ' + $(this).tooltip('isOpen').toString());
+  });; // 先实例化
   $('a').tooltip('option', 'offsetX', 20); // 实例化后访问 option
 
   $('a').tooltip('disable');  // 禁用
