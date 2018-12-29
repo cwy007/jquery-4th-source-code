@@ -48,4 +48,7 @@ $(document).ready(function () {
 
   $('a').tooltip('disable');  // 禁用
   $('a').tooltip('enable');   // 启用
+
+  // $('a').tooltip('open');   // 手动打开提示条
+  // $('a').tooltip('close');   // 手动关闭提示条
 });

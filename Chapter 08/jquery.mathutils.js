@@ -103,6 +103,14 @@
       $.Widget.prototype.destroy.apply(this, arguments); // 调用保存在原型对象 prototype 中的 destroy 方法
     },
 
+    open: function () { // 共有函数（子方法）
+      this._open();
+    },
+
+    close: function () { // 手动关闭方法
+      this._close();
+    },
+
     _open: function () { // 内部方法或属性，以下划线开头
       if (!this.options.disabled) { // 启用或禁用部件
         var elementOffset = this.element.offset(); // offset() 会返回第一个匹配元素相对于 document 位移对象 { top: value1, left: value2 }
