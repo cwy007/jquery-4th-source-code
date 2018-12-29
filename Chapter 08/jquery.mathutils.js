@@ -54,7 +54,8 @@
             left: $originalElement.offset().left + offset.x,
             top: $originalElement.offset().top + offset.y,
             margin: 0,
-            zIndex: -1,
+            // ========== 练习2
+            zIndex: options.zIndex,
             opacity: options.opacity
           })
           .appendTo('body');
@@ -70,7 +71,9 @@
         x: index,
         y: index
       };
-    }
+    },
+    // ========== 练习2添加
+    zIndex: -1
   };
 })(jQuery);
 
