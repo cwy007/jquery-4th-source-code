@@ -77,6 +77,14 @@
 // 03
 (function ($) {
   $.widget('ljq.tooltip', { // 命名空间的概念 ljq。tooltip 为组件名
+    options: {
+      offsetX: 10,
+      offsetY: 10,
+      content: function() {
+        return $(this).data('tooltip-text');
+      }
+    },
+
     _create: function () {
       this._tooltipDiv = $('<div></div>')
         .addClass('ljq-tooltip-text ui-widget ui-state-highlight ui-corner-all')
@@ -100,9 +108,9 @@
         var elementOffset = this.element.offset(); // offset() 会返回第一个匹配元素相对于 document 位移对象 { top: value1, left: value2 }
         this._tooltipDiv.css({
           position: 'absolute',
-          left: elementOffset.left,
-          top: elementOffset.top + this.element.height() // 位于最初选择元素的下方
-        }).text(this.element.data('tooltip-text'));
+          left: elementOffset.left + this.options.offsetX,
+          top: elementOffset.top + this.element.height() + this.options.offsetY // 位于最初选择元素的下方
+        }).text(this.options.content.call(this.element[0]));
         this._tooltipDiv.show();
       }
     },

@@ -41,7 +41,11 @@ $(document).ready(function () {
     }
   });
 
-  $('a').tooltip();           // 实例化
+  // 自带组件 & 自定义组件
+  // $('a').tooltip({offsetX: -10, offsetY: 25}); // 实例化
+  $('a').tooltip(); // 先实例化
+  $('a').tooltip('option', 'offsetX', 20); // 实例化后访问 option
+
   $('a').tooltip('disable');  // 禁用
   $('a').tooltip('enable');   // 启用
 });
