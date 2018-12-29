@@ -51,4 +51,14 @@ $(document).ready(function () {
 
   // $('a').tooltip('open');   // 手动打开提示条
   // $('a').tooltip('close');   // 手动关闭提示条
+
+  // $.myPlugin 扩展 jQuery
+  // $.fn.myPlugin 扩展 jQuery 原型
+
+  // 命名空间
+  // $
+  // $.myPlugin, $.myPlugin.publicMethod, $.fn.myPlugin.plugin
+  // $.fn.myPlugin.defaults = {}
+  // var options = $.extend({}, $.fn.shadow.defaults, opts);
+
 });

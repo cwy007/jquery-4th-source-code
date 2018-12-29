@@ -75,7 +75,7 @@
 })(jQuery);
 
 // 03
-(function ($) {
+(function ($) { // $ 在这里为一个局部变量
   $.widget('ljq.tooltip', { // 命名空间的概念 ljq。tooltip 为组件名
     options: {
       offsetX: 10,
@@ -120,11 +120,13 @@
           top: elementOffset.top + this.element.height() + this.options.offsetY // 位于最初选择元素的下方
         }).text(this.options.content.call(this.element[0]));
         this._tooltipDiv.show();
+        this._trigger('open');
       }
     },
 
     _close: function () {
       this._tooltipDiv.hide();
+      this._trigger('close');
     }
   });
 })(jQuery);
