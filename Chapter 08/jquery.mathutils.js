@@ -124,15 +124,19 @@
           top: elementOffset.top + this.element.height() + this.options.offsetY // 位于最初选择元素的下方
         }).text(this.options.content.call(this.element[0]));
         this._tooltipDiv.show();
+        this.isTooltipOpen = true;
         this._trigger('open');
-        return this.isTooltipOpen = true;
+        // ========== 练习5
+        if (this.options.effect) {
+          this._tooltipDiv.effect(this.options.effect, {distance: 10, duration: 80});
+        }
       }
     },
 
     _close: function () {
       this._tooltipDiv.hide();
+      this.isTooltipOpen = false;
       this._trigger('close');
-      return this.isTooltipOpen = false;
     },
 
     // ========== 练习2

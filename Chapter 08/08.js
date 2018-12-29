@@ -86,12 +86,15 @@ $(document).ready(function () {
         async: false,     // 默认值为 true
         success: function (data, result, status) {
           result = data;
-          console.log(result);
-          console.log(status);
+          // console.log(result);
+          // console.log(status);
         }
       });
       return result;
     }
   });
+
+  //练习5 测试代码
+  $('a').tooltip({effect: 'shake'});
 });
 
