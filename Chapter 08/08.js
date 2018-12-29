@@ -41,5 +41,7 @@ $(document).ready(function () {
     }
   });
 
-  $('a').tooltip();
+  $('a').tooltip();           // 实例化
+  $('a').tooltip('disable');  // 禁用
+  $('a').tooltip('enable');   // 启用
 });

@@ -96,13 +96,15 @@
     },
 
     _open: function () { // 内部方法或属性，以下划线开头
-      var elementOffset = this.element.offset(); // offset() 会返回第一个匹配元素相对于 document 位移对象 { top: value1, left: value2 }
-      this._tooltipDiv.css({
-        position: 'absolute',
-        left: elementOffset.left,
-        top: elementOffset.top + this.element.height() // 位于最初选择元素的下方
-      }).text(this.element.data('tooltip-text'));
-      this._tooltipDiv.show();
+      if (!this.options.disabled) { // 启用或禁用部件
+        var elementOffset = this.element.offset(); // offset() 会返回第一个匹配元素相对于 document 位移对象 { top: value1, left: value2 }
+        this._tooltipDiv.css({
+          position: 'absolute',
+          left: elementOffset.left,
+          top: elementOffset.top + this.element.height() // 位于最初选择元素的下方
+        }).text(this.element.data('tooltip-text'));
+        this._tooltipDiv.show();
+      }
     },
 
     _close: function () {
