@@ -24,4 +24,7 @@ $(document).ready(function () {
     }
   });
 
+  // 条纹效果
+  $('#news').find('tr:nth-child(even)').addClass('alt');
+
 });
