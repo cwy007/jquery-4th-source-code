@@ -13,6 +13,11 @@ $(document).ready(function () {
 
     $('#topics a.selected').removeClass('selected'); // 去掉主题中，链接上的 selected 类
     $(this).addClass('selected'); // 为当前被点击元素添加 selected 类
+
+    $('#news tr').show();
+    if (topic != 'All') {
+      $('#news tr:has(td):not(:contains("' + topic + '")').hide();
+    }
   });
 
 });
