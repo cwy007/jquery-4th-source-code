@@ -14,9 +14,13 @@ $(document).ready(function () {
     $('#topics a.selected').removeClass('selected'); // 去掉主题中，链接上的 selected 类
     $(this).addClass('selected'); // 为当前被点击元素添加 selected 类
 
-    $('#news tr').show();
-    if (topic != 'All') {
-      $('#news tr:has(td):not(:contains("' + topic + '")').hide();
+    // $('#news tr').show();
+    $('#news').find('tr').show();
+    if (topic != 'All') { // #news tr:has(td) 包含实际内容的行
+      // $('#news tr:has(td):not(:contains("' + topic + '"))').hide();
+      $('#news').find('tr:has(td)').not(function () {
+        return $(this).children(':nth-child(4)').text() == topic;
+      }).hide();
     }
   });
 
