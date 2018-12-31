@@ -37,12 +37,13 @@ $(document).ready(function () {
   // });
 
   function stripe() {
-    $('#news').find('tr.alt').removeClass('alt');
-    $('#news tbody').each(function () {
-      $(this).children(':visible').has('td').each(function (index) {
-        $(this).data('index', index)
-      }).filter(':group(3)').addClass('alt'); // :group() 为自定义的伪类选择符
-    });
+    $('#news')
+      .find('tr.alt').removeClass('alt').end() // 尽量避免使用选择符；选择符中的空格与find() 方法等效
+      .find('tbody').each(function () {
+        $(this).children(':visible').has('td').each(function (index) {
+          $(this).data('index', index)
+        }).filter(':group(3)').addClass('alt'); // :group() 为自定义的伪类选择符
+      });
   }
   // .filter(function (index) {
   //   return (index % 4) < 2;
