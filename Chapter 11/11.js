@@ -21,6 +21,28 @@ $(document).ready(function () {
       }
     };
 
+  function showBio() {
+    var $member = $(this).parent(),
+      $bio = $member.find('p.bio'),
+      startStyles = $.extend(bioBaseStyles, $member.offset()),
+      endStyles = {
+        width: $bio.width(),
+        top: $member.offset().top + 5,
+        left: $member.width() + $member.offset().left - 5,
+        opacity: 'show'
+      };
+
+    $movable
+      .html($bio.clone())
+      .css(startStyles)
+      .animate(endStyles, bioEffects)
+      .animate({
+        height: $bio.height()
+      }, {
+        easing: 'easeOutQuart'
+      });
+  }
+
   function showDetails() {
     var $member = $(this);
     if ($member.hasClass('active')) {
