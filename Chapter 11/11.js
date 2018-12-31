@@ -5,6 +5,22 @@ $(document).ready(function () {
     $.fx.off = !$.fx.off;
   });
 
+  var $movable = $('<div id="movable"></div>')
+    .appendTo('body');
+
+  var bioBaseStyles = {
+      display: 'none',
+      height: '5px',
+      width: '25px'
+    },
+    bioEffects = {
+      duration: 800,
+      easing: 'easeOutQuart',
+      specialEasing: {
+        opacity: 'linear'
+      }
+    };
+
   function showDetails() {
     var $member = $(this);
     if ($member.hasClass('active')) {
