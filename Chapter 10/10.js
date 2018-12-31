@@ -45,14 +45,16 @@
       $(this).trigger('nextPage', [true]);
     });
 
-    var timer = 0;
+    var scrolled = false;
     $(window).scroll(function () {
-      if (!timer) {
-        timer = setTimeout(function () {
-          checkScrollPosition();
-          timer = 0;
-        }, 250);
+      scrolled = true;
+    });
+    setInterval(function () {
+      if (scrolled) {
+        checkScrollPosition();
+        scrolled = false;
       }
-    }).trigger('scroll');
+    }, 250);
+    checkScrollPosition();
   });
 })(jQuery);
