@@ -17,9 +17,12 @@ $(document).ready(function () {
     }
   });
 
-  $('div.photo').hover(function () {
-    $(this).find('.details').fadeTo('fast', 0.7);
-  }, function () {
-    $(this).find('.details').fadeOut('fast');
+  $('div.photo').on('mouseenter mouseleave', function (event) {
+    var $details = $(this).find('.details');
+    if (event.type == 'mouseenter') {
+      $details.fadeTo('fast', 0.7);
+    } else {
+      $details.fadeOut('fast');
+    }
   });
 });
