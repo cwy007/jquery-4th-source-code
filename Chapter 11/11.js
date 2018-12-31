@@ -24,6 +24,11 @@ $(document).ready(function () {
       $(this).animate({
         left: 0,
         top: 25 * index
+      }, {
+        duration: 'slow',
+        specialEasing: {
+          top: 'easeInQuart'
+        }
       });
     });
   }
