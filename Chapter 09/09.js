@@ -5,6 +5,23 @@
 //
 // See README.txt for more information.
 
+(function ($) {
+  $.extend($.expr[':'], {
+    group: function (element, index, matches, set) {
+      var num = parseInt(matches[3], 10); // 这里的 10 表示 10进制
+      if (isNaN(num)) { // isNaN  是一个全局方法，会将参数转换为数字，若为 NaN，返回 true，否则，返回 false； 与 Number.isNaN() 方法不同，后者不会将参数转换为数字
+        return false;
+      }
+      // console.log(index % (num * 2) < num);
+      // console.log($(element).data('index'));
+      // console.log(index); // 这里的 index 怎么一直是 0 ？
+      // console.log(set);
+      // console.log(num);
+      return $(element).data('index') % (num * 2) < num; // 从 data 属性中取出对应的索引值
+    }
+  });
+})(jQuery);
+
 $(document).ready(function () {
 
   // $('#topics a').click(function (event) {
@@ -39,12 +56,14 @@ $(document).ready(function () {
   function stripe() {
     $('#news').find('tr.alt').removeClass('alt');
     $('#news tbody').each(function () {
-      $(this).children(':visible').has('td')
-        .filter(function (index) {
-          return (index % 4) < 2;
-        }).addClass('alt');
+      $(this).children(':visible').has('td').each(function (index) {
+        $(this).data('index', index)
+      }).filter(':group(4)').addClass('alt'); // :group() 为自定义的伪类选择符
     });
   }
+  // .filter(function (index) {
+  //   return (index % 4) < 2;
+  // }).addClass('alt');
 
   stripe(); // 条纹
 
