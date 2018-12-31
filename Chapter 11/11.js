@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $('#fx-toggle').show().on('click', function () {
+    $.fx.off = !$.fx.off;
+  });
+
   $('div.member').on('mouseenter mouseleave', function (event) {
     var size = event.type == 'mouseenter' ? 85 : 75;
     var padding = event.type == 'mouseenter' ? 0 : 5;
