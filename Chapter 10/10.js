@@ -1,4 +1,21 @@
 (function ($) {
+  $.event.special.throttledScroll = {
+    setup: function (data) {
+      var timer = 0;
+      $(this).on('scroll.throttledScroll', function (event) {
+        if (!timer) {
+          timer = setTimeout(function () {
+            $(this).triggerHandler('throttledScroll');
+            timer = 0;
+          }, 250);
+        }
+      });
+    },
+    teardown: function () {
+      $(this).off('scroll.throttledScroll');
+    }
+  };
+
   $(document).on('mouseenter mouseleave', 'div.photo', function (event) {
     var $details = $(this).find('.details');
     if (event.type == 'mouseenter') {
@@ -45,16 +62,8 @@
       $(this).trigger('nextPage', [true]);
     });
 
-    var scrolled = false;
-    $(window).scroll(function () {
-      scrolled = true;
-    });
-    setInterval(function () {
-      if (scrolled) {
-        checkScrollPosition();
-        scrolled = false;
-      }
-    }, 250);
-    checkScrollPosition();
+    $(window)
+      .on('throttledScroll', checkScrollPosition)
+      .trigger('throttledScroll');
   });
 })(jQuery);
