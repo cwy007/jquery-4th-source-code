@@ -83,4 +83,14 @@ $(document).ready(function () {
 
     stripe(); // 条纹
   });
+
+  $(document).ready(function () {
+    var $cell = $('#release').nextAll();
+    $cell.addClass('highlight');
+    console.log($cell);
+    console.log($cell.context);
+    console.log($cell.selector);
+    console.log($cell.prevObject);
+  });
+
 });
