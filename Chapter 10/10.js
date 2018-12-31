@@ -45,6 +45,14 @@
       $(this).trigger('nextPage', [true]);
     });
 
-    $(window).scroll(checkScrollPosition).trigger('scroll');
+    var timer = 0;
+    $(window).scroll(function () {
+      if (!timer) {
+        timer = setTimeout(function () {
+          checkScrollPosition();
+          timer = 0;
+        }, 250);
+      }
+    }).trigger('scroll');
   });
 })(jQuery);
