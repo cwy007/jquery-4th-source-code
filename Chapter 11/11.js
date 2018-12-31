@@ -1,6 +1,12 @@
-// This is the custom JavaScript file referenced by index.html. You will notice
-// that this file is currently empty. By adding code to this empty file and
-// then viewing index.html in a browser, you can experiment with the example
-// page or follow along with the examples in the book.
-//
-// See README.txt for more information.
+$(document).ready(function () {
+  $('div.member').on('mouseenter mouseleave', function (event) {
+    var size = event.type == 'mouseenter' ? 85 : 75;
+    var padding = event.type == 'mouseenter' ? 0 : 5;
+    $(this).find('img').animate({
+      width: size,
+      height: size,
+      paddingTop: padding,
+      paddingLeft: padding
+    });
+  });
+});
