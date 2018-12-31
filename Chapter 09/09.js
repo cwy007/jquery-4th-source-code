@@ -85,7 +85,7 @@ $(document).ready(function () {
   });
 
   $(document).ready(function () {
-    var $cell = $('#release').nextAll();
+    var $cell = $('#release').nextAll().addBack();
     $cell.addClass('highlight');
     console.log($cell);
     console.log($cell.context);
