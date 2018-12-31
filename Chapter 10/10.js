@@ -17,7 +17,7 @@ $(document).ready(function () {
     }
   });
 
-  $('#gallery').on('mouseenter mouseleave', 'div.photo', function (event) {
+  $(document).on('mouseenter mouseleave', 'div.photo', function (event) {
     var $details = $(this).find('.details');
     if (event.type == 'mouseenter') {
       $details.fadeTo('fast', 0.7);
