@@ -1,5 +1,4 @@
 (function ($) {
-  // 在文档一打开就可以使用
   $(document).on('mouseenter mouseleave', 'div.photo', function (event) {
     var $details = $(this).find('.details');
     if (event.type == 'mouseenter') {
@@ -14,6 +13,7 @@
     if (url) {
       $.get(url, function (data) {
         $('#gallery').append(data);
+        checkScrollPosition();
       });
     }
   });
@@ -28,10 +28,19 @@
     }
   });
 
+  function checkScrollPosition() {
+    var distance = $(window).scrollTop() + $(window).height();
+    if ($('#container').height() <= distance) {
+      $(document).trigger('nextPage');
+    }
+  }
+
   $(document).ready(function () {
     $('#more-photos').click(function (event) {
       event.preventDefault();
       $(this).trigger('nextPage');
     });
+
+    $(window).scroll(checkScrollPosition).trigger('scroll');
   });
 })(jQuery);
