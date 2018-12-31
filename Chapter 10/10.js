@@ -8,11 +8,15 @@
     }
   });
 
-  $(document).on('nextPage', function () {
+  $(document).on('nextPage', function (event, scrollToVisible) {
     var url = $('#more-photos').attr('href');
     if (url) {
       $.get(url, function (data) {
-        $('#gallery').append(data);
+        var $data = $(data).appendTo('#gallery');
+        if (scrollToVisible) {
+          var newTop = $data.offset().top;
+          $(window).scrollTop(newTop);
+        }
         checkScrollPosition();
       });
     }
@@ -38,7 +42,7 @@
   $(document).ready(function () {
     $('#more-photos').click(function (event) {
       event.preventDefault();
-      $(this).trigger('nextPage');
+      $(this).trigger('nextPage', [true]);
     });
 
     $(window).scroll(checkScrollPosition).trigger('scroll');
