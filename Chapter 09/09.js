@@ -26,8 +26,14 @@ $(document).ready(function () {
 
   // 条纹效果
   // $('#news').find('tr:nth-child(even)').addClass('alt');
-  $('#news tr').filter(function (index) {
-    return (index % 4) < 2;
-  }).addClass('alt');
+  // $('#news tr').filter(function (index) {
+  //   return (index % 4) < 2;
+  // }).addClass('alt');
+
+  $('#news tbody').each(function () {
+    $(this).children().has('td').filter(function (index) {
+      return (index % 4) < 2;
+    }).addClass('alt');
+  });
 
 });
