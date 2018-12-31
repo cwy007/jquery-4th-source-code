@@ -22,6 +22,21 @@
   });
 })(jQuery);
 
+$(function ($) {
+  $.fn.column = function () {
+    var $cells = $();
+    this.each(function () {
+      var $td = $(this).closest('td, th'); // 返回一个最近的祖先元素 ancestor，（该方法向上遍历时，也会包含自身）
+      if ($td.length) {
+        var colNum = $td[0].cellIndex + 1;
+        var $columnCells = $td.closest('table').find('td, th').filter(':nth-child(' + colNum + ')');
+        $cells.add($columnCells);
+      }
+    });
+    return this.pushStack($cells);
+  };
+})(jQuery);
+
 $(document).ready(function () {
 
   // $('#topics a').click(function (event) {
@@ -58,7 +73,7 @@ $(document).ready(function () {
     $('#news tbody').each(function () {
       $(this).children(':visible').has('td').each(function (index) {
         $(this).data('index', index)
-      }).filter(':group(4)').addClass('alt'); // :group() 为自定义的伪类选择符
+      }).filter(':group(3)').addClass('alt'); // :group() 为自定义的伪类选择符
     });
   }
   // .filter(function (index) {
@@ -87,10 +102,10 @@ $(document).ready(function () {
   $(document).ready(function () {
     var $cell = $('#release').nextAll().addBack();
     $cell.addClass('highlight');
-    console.log($cell);
-    console.log($cell.context);
-    console.log($cell.selector);
-    console.log($cell.prevObject);
+    // console.log($cell);
+    // console.log($cell.context);
+    // console.log($cell.selector);
+    // console.log($cell.prevObject);
   });
 
 });
