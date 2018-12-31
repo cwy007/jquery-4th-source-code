@@ -44,21 +44,23 @@ $(document).ready(function () {
   }
 
   function showDetails() {
-    var $member = $(this);
+    var $member = $(this).parent();
     if ($member.hasClass('active')) {
       return;
     }
+    $movable.fadeOut();
 
     $('div.member.active')
       .removeClass('active')
       .children('div').fadeOut();
-    $member.addClass('active');
 
+    $member.addClass('active');
     $member.find('div').css({
       display: 'block',
       left: '-300px',
       top: 0
     }).each(function (index) {
+
       $(this).animate({
         left: 0,
         top: 25 * index
@@ -68,17 +70,19 @@ $(document).ready(function () {
           top: 'easeInQuart'
         }
       });
-    });
+    }).promise().done(showBio);
   }
 
   $('div.member').on('mouseenter mouseleave', function (event) {
-    var size = event.type == 'mouseenter' ? 85 : 75;
-    var padding = event.type == 'mouseenter' ? 0 : 5;
-    $(this).find('img').stop().animate({
-      width: size,
-      height: size,
-      paddingTop: padding,
-      paddingLeft: padding
-    });
-  }).click(showDetails);
+      var size = event.type == 'mouseenter' ? 85 : 75;
+      var pad = event.type == 'mouseenter' ? 0 : 5;
+      $(this).find('img').stop().animate({
+        width: size,
+        height: size,
+        paddingTop: pad,
+        paddingLeft: pad
+      });
+    })
+    .find('img').click(showDetails);
+
 });
