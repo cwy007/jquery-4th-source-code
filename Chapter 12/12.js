@@ -116,7 +116,7 @@ $(document).ready(function () {
   function buildRow(row) {
     var html = '<tr>';
     html += '<td><img src="images/' + row.img + '"></td>';
-    html += '<td>' + row.titleFormatted + '</td>'; // 用于显示的数据
+    html += '<td>' + row.titleFormatted + '</td>';
     html += '<td>' + row.authorsFormatted + '</td>';
     html += '<td>' + row.published + '</td>';
     html += '<td>$' + row.price + '</td>';
@@ -130,7 +130,7 @@ $(document).ready(function () {
     return allRows.join('');
   }
 
-  function prepRows(rows) { // 处理数据的方法
+  function prepRows(rows) {
     $.each(rows, function (i, row) {
       var authors = [],
         authorsFormatted = [];
@@ -152,8 +152,38 @@ $(document).ready(function () {
   $.getJSON('books.json', function (json) {
     $(document).ready(function () {
       var $table3 = $('#t-3');
-      var rows = prepRows(json); // 需改 json 数据：准备好用于显示的数据和用于排序的数据
-      $table3.find('tbody').html(buildRows(rows));
+      var rows = prepRows(json);
+      $table3.find('tbody').html(buildRows(rows)); // table3 的初始状态
+
+      var $headers = $table3.find('thead th').slice(1);
+      $headers
+        .wrapInner('<a href="#"></a>') // 加链接
+        .addClass('sort'); // 加类
+
+      $headers.on('click', function (event) {
+        event.preventDefault();
+        var $header = $(this),
+          sortKey = $header.data('sort').key, // html 中设定好的数据，排序标识
+          sortDirection = 1;
+
+        if ($header.hasClass('sorted-asc')) { // 用于切换升序和降序
+          sortDirection = -1;
+        }
+
+        rows.sort(function (a, b) { // 这里的 rows 指格式化后的 json 数据
+          var keyA = a[sortKey];
+          var keyB = b[sortKey];
+
+          if (keyA < keyB) return -sortDirection;
+          if (keyA > keyB) return sortDirection;
+          return 0;
+        });
+
+        $headers.removeClass('sorted-asc sorted-desc'); // 清空视图中的类
+        $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc'); // 给当前表头添加类
+
+        $table3.children('tbody').html(buildRows(rows)); // 根据排过序的 rows json 数据，重新构建表格 table
+      });
     });
   });
 })(jQuery);
