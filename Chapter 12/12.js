@@ -13,8 +13,10 @@ $(document).ready(function () {
     var column = $(this).index();
 
     var rows = $table1.find('tbody > tr').each(function () {
-      var key = $(this).children('td').eq(column).text();
-      $(this).data('sortKey', $.trim(key).toUpperCase());
+      var $cell = $(this).children('td').eq(column);
+      var key = $cell.find('span.sort-key').text() + ' '; // 构建新的排序标识，可以按作者的姓进行排序
+      key += $.trim($cell.text()).toUpperCase();
+      $(this).data('sortKey', key);
     }).get();
 
     rows.sort(function (a, b) {
