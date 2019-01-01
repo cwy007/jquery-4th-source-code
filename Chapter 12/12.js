@@ -36,10 +36,15 @@ $(document).ready(function () {
     event.preventDefault();
     var $header = $(this),
       column = $header.index(),
-      keyType = $header.data('keyType');
+      keyType = $header.data('keyType'),
+      sortDirection = 1; // 排序方向
 
     if (!$.isFunction(sortKeys[keyType])) {
       return;
+    }
+
+    if ($header.hasClass('sorted-asc')) { // 用一个类跟踪排序方向
+      sortDirection = -1;
     }
 
     var rows = $table1.find('tbody > tr').each(function () {
@@ -50,10 +55,13 @@ $(document).ready(function () {
     rows.sort(function (a, b) {
       var keyA = $(a).data('sortKey');
       var keyB = $(b).data('sortKey');
-      if (keyA < keyB) return -1;
-      if (keyA > keyB) return 1;
+      if (keyA < keyB) return -sortDirection;
+      if (keyA > keyB) return sortDirection;
       return 0;
     });
+
+    $headers.removeClass('sorted-asc sorted-desc'); // 先清除已有的 类
+    $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc'); // 根据当前情况添加新的类
 
     $.each(rows, function (index, row) {
       $table1.children('tbody').append(row);
