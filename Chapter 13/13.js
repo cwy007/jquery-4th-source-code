@@ -3,7 +3,8 @@ $(document).ready(function () {
     $response = $('#response'),
     noresults = 'There were no search results.',
     failed = 'Sorry, but the request could not ' +
-    'reach its destination. Try again later.';
+    'reach its destination. Try again later.',
+    api = {};
 
   var buildItem = function (item) {
     var title = item.name,
@@ -46,22 +47,29 @@ $(document).ready(function () {
   $ajaxForm.on('submit', function (event) {
     event.preventDefault();
 
-    $response.addClass('loading').empty();
+    $response.empty();
 
-    $.ajax({
+    var search = $('#title').val();
+    if (search == '') {
+      return;
+    }
+
+    $response.addClass('loading');
+
+    if (!api[search]) {
+      api[search] = $.ajax({
         url: 'http://book.learningjquery.com/api/',
         dataType: 'jsonp',
         data: {
-          title: $('#title').val()
+          title: search
         },
         timeout: 15000
-      })
-      .done(response)
-      .fail(function () {
-        $response.html(failed);
-      })
-      .always(function () {
-        $response.removeClass('loading');
       });
+    }
+    api[search].done(response).fail(function () {
+      $response.html(failed);
+    }).always(function () {
+      $response.removeClass('loading');
+    });
   });
 });
