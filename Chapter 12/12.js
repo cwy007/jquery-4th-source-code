@@ -37,13 +37,13 @@ $(document).ready(function () {
     var $header = $(this),
       column = $header.index(),
       keyType = $header.data('keyType'),
-      sortDirection = 1; // 排序方向
+      sortDirection = 1;
 
     if (!$.isFunction(sortKeys[keyType])) {
       return;
     }
 
-    if ($header.hasClass('sorted-asc')) { // 用一个类跟踪排序方向
+    if ($header.hasClass('sorted-asc')) {
       sortDirection = -1;
     }
 
@@ -60,11 +60,51 @@ $(document).ready(function () {
       return 0;
     });
 
-    $headers.removeClass('sorted-asc sorted-desc'); // 先清除已有的 类
-    $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc'); // 根据当前情况添加新的类
+    $headers.removeClass('sorted-asc sorted-desc');
+    $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc');
 
     $.each(rows, function (index, row) {
       $table1.children('tbody').append(row);
+    });
+  });
+});
+
+/************************************************
+  Table 2: Sorting by reading HTML5 data.
+************************************************/
+$(document).ready(function () {
+  var $table2 = $('#t-2');
+  var $headers = $table2.find('thead th').slice(1);
+  $headers
+    .wrapInner('<a href="#"></a>')
+    .addClass('sort');
+
+  var rows = $table2.find('tbody > tr').get();
+
+  $headers.on('click', function (event) {
+    event.preventDefault();
+    var $header = $(this),
+      sortKey = $header.data('sort').key,
+      sortDirection = 1;
+
+    if ($header.hasClass('sorted-asc')) {
+      sortDirection = -1;
+    }
+
+    rows.sort(function (a, b) {
+      var keyA = $(a).data('book')[sortKey];
+      var keyB = $(b).data('book')[sortKey];
+
+      if (keyA < keyB) return -sortDirection;
+      if (keyA > keyB) return sortDirection;
+      return 0;
+    });
+
+    $headers.removeClass('sorted-asc sorted-desc');
+    $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc');
+
+    $.each(rows, function (index, row) {
+      $table2.children('tbody').append(row);
     });
   });
 });
