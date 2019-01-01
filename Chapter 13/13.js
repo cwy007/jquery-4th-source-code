@@ -1,3 +1,90 @@
+$.ajaxSetup({
+  accepts: {
+    yaml: 'application/x-yaml, text/yaml'
+  },
+  contents: {
+    yaml: /yaml/
+  },
+  converters: {
+    'text yaml': function (textValue) {
+      var result = YAML.eval(textValue);
+      var errors = YAML.getErrors();
+      if (errors.length) {
+        throw errors;
+      }
+      return result;
+    }
+  }
+});
+
+$.ajaxPrefilter(function (options) {
+  if (/\.yml$/.test(options.url)) {
+    return 'yaml';
+  }
+});
+
+$.ajaxTransport('img', function (settings) {
+  var $img, img, prop;
+  return {
+    send: function (headers, complete) {
+      function callback(success) {
+        if (success) {
+          complete(200, 'OK', {
+            img: img
+          });
+        } else {
+          $img.remove();
+          complete(404, 'Not Found');
+        }
+      }
+
+      $img = $('<img>', {
+        src: settings.url
+      });
+      img = $img[0];
+      prop = typeof img.naturalWidth === 'undefined' ? 'width' : 'naturalWidth';
+      if (img.complete) {
+        callback(!!img[prop]);
+      } else {
+        $img.on('load error', function (event) {
+          callback(event.type == 'load');
+        });
+      }
+
+    },
+    abort: function () {
+      if ($img) {
+        $img.remove();
+      }
+    }
+  };
+});
+
+$.getScript('yaml.js').done(function () {
+  $.ajax({
+    url: 'categories.yml'
+  }).done(function (data) {
+    var cats = '';
+    $.each(data, function (category, subcategories) {
+      cats += '<li><a href="#">' + category + '</a></li>';
+    });
+
+    $(document).ready(function () {
+      var $cats = $('#categories').removeClass('hide');
+      $('<ul></ul>', {
+        html: cats
+      }).appendTo($cats);
+    });
+  });
+});
+
+$(document).on('click', '#categories a', function (event) {
+  event.preventDefault();
+  $(this).parent().toggleClass('active')
+    .siblings('.active').removeClass('active');
+  $('#ajax-form').triggerHandler('submit');
+});
+
 $(document).ready(function () {
   var $ajaxForm = $('#ajax-form'),
     $response = $('#response'),
@@ -51,8 +138,10 @@ $(document).ready(function () {
 
     $response.empty();
 
-    var search = $('#title').val();
-    if (search == '') {
+    var title = $('#title').val(),
+      category = $('#categories').find('li.active').text(),
+      search = category + '-' + title;
+    if (search == '-') {
       return;
     }
 
@@ -63,7 +152,8 @@ $(document).ready(function () {
         url: 'http://book.learningjquery.com/api/',
         dataType: 'jsonp',
         data: {
-          title: search
+          title: title,
+          category: category
         },
         timeout: 15000
       });
@@ -80,5 +170,20 @@ $(document).ready(function () {
     searchTimeout = setTimeout(function () {
       $ajaxForm.triggerHandler('submit');
     }, searchDelay);
+  });
+
+  $.ajax({
+    url: 'sunset.jpg',
+    dataType: 'img'
+  }).done(function (img) {
+    $('<div></div>', {
+      id: 'picture',
+      html: img
+    }).appendTo('body');
+  }).fail(function (xhr, textStatus, msg) {
+    $('<div></div>', {
+      id: 'picture',
+      html: textStatus + ': ' + msg
+    }).appendTo('body');
   });
 });
