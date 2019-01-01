@@ -1,6 +1,10 @@
-// This is the custom JavaScript file referenced by index.html. You will notice
-// that this file is currently empty. By adding code to this empty file and
-// then viewing index.html in a browser, you can experiment with the example
-// page or follow along with the examples in the book.
-//
-// See README.txt for more information.
+$(document).ready(function () {
+  var $ajaxForm = $('#ajax-form'),
+    $response = $('#response');
+
+  $ajaxForm.on('submit', function (event) {
+    event.preventDefault();
+    $response.load('http://api.jquery.com/#content',
+      $ajaxForm.serialize()); // serialize() 方法序列化后的 form value 可以用于URL查询字符串
+  });
+});
