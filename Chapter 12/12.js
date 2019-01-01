@@ -108,3 +108,37 @@ $(document).ready(function () {
     });
   });
 });
+
+/************************************************
+  Table 3: Sorting by recreating HTML from JSON.
+************************************************/
+(function ($) {
+  function buildRow(row) {
+    var authors = [];
+    $.each(row.authors, function (index, auth) {
+      authors[index] = auth.first_name + ' ' + auth.last_name;
+    });
+
+    var html = '<tr>';
+    html += '<td><img src="images/' + row.img + '"></td>';
+    html += '<td>' + row.title + '</td>';
+    html += '<td>' + authors.join(', ') + '</td>';
+    html += '<td>' + row.published + '</td>';
+    html += '<td>$' + row.price + '</td>';
+    html += '</tr>';
+
+    return html;
+  }
+
+  function buildRows(rows) {
+    var allRows = $.map(rows, buildRow);
+    return allRows.join('');
+  }
+
+  $.getJSON('books.json', function (json) {
+    $(document).ready(function () {
+      var $table3 = $('#t-3');
+      $table3.find('tbody').html(buildRows(json));
+    });
+  });
+})(jQuery);
