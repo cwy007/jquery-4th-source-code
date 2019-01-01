@@ -114,15 +114,10 @@ $(document).ready(function () {
 ************************************************/
 (function ($) {
   function buildRow(row) {
-    var authors = [];
-    $.each(row.authors, function (index, auth) {
-      authors[index] = auth.first_name + ' ' + auth.last_name;
-    });
-
     var html = '<tr>';
     html += '<td><img src="images/' + row.img + '"></td>';
-    html += '<td>' + row.title + '</td>';
-    html += '<td>' + authors.join(', ') + '</td>';
+    html += '<td>' + row.titleFormatted + '</td>'; // 用于显示的数据
+    html += '<td>' + row.authorsFormatted + '</td>';
     html += '<td>' + row.published + '</td>';
     html += '<td>$' + row.price + '</td>';
     html += '</tr>';
@@ -135,10 +130,30 @@ $(document).ready(function () {
     return allRows.join('');
   }
 
+  function prepRows(rows) { // 处理数据的方法
+    $.each(rows, function (i, row) {
+      var authors = [],
+        authorsFormatted = [];
+
+      rows[i].titleFormatted = row.title;
+      rows[i].title = row.title.toUpperCase();
+
+      $.each(row.authors, function (j, auth) {
+        authors[j] = auth.last_name + ' ' + auth.first_name;
+        authorsFormatted[j] = auth.first_name + ' ' + auth.last_name;
+      });
+      rows[i].authorsFormatted = authorsFormatted.join(', ');
+      rows[i].authors = authors.join(' ').toUpperCase();
+    });
+
+    return rows;
+  }
+
   $.getJSON('books.json', function (json) {
     $(document).ready(function () {
       var $table3 = $('#t-3');
-      $table3.find('tbody').html(buildRows(json));
+      var rows = prepRows(json); // 需改 json 数据：准备好用于显示的数据和用于排序的数据
+      $table3.find('tbody').html(buildRows(rows));
     });
   });
 })(jQuery);
