@@ -1,4 +1,28 @@
 /************************************************
+  Set up table headings.
+************************************************/
+$(document).ready(function () {
+  $('table').each(function (index) {
+    var $table = $(this);
+    $('<h3></h3>', {
+      id: 'table-title-' + index,
+      'class': 'table-title',
+      text: 'Table ' + (index + 1),
+      data: {
+        'index': index
+      },
+      click: function (event) {
+        event.preventDefault();
+        $table.fadeToggle();
+      },
+      css: {
+        glowColor: '#00ff00' // glow 发光的
+      }
+    }).insertBefore($table);
+  });
+});
+
+/************************************************
   Table 1: Sorting by parsing cell contents.
 ************************************************/
 $(document).ready(function () {
@@ -153,24 +177,24 @@ $(document).ready(function () {
     $(document).ready(function () {
       var $table3 = $('#t-3');
       var rows = prepRows(json);
-      $table3.find('tbody').html(buildRows(rows)); // table3 的初始状态
+      $table3.find('tbody').html(buildRows(rows));
 
       var $headers = $table3.find('thead th').slice(1);
       $headers
-        .wrapInner('<a href="#"></a>') // 加链接
-        .addClass('sort'); // 加类
+        .wrapInner('<a href="#"></a>')
+        .addClass('sort');
 
       $headers.on('click', function (event) {
         event.preventDefault();
         var $header = $(this),
-          sortKey = $header.data('sort').key, // html 中设定好的数据，排序标识
+          sortKey = $header.data('sort').key,
           sortDirection = 1;
 
-        if ($header.hasClass('sorted-asc')) { // 用于切换升序和降序
+        if ($header.hasClass('sorted-asc')) {
           sortDirection = -1;
         }
 
-        rows.sort(function (a, b) { // 这里的 rows 指格式化后的 json 数据
+        rows.sort(function (a, b) {
           var keyA = a[sortKey];
           var keyB = b[sortKey];
 
@@ -179,10 +203,10 @@ $(document).ready(function () {
           return 0;
         });
 
-        $headers.removeClass('sorted-asc sorted-desc'); // 清空视图中的类
-        $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc'); // 给当前表头添加类
+        $headers.removeClass('sorted-asc sorted-desc');
+        $header.addClass(sortDirection == 1 ? 'sorted-asc' : 'sorted-desc');
 
-        $table3.children('tbody').html(buildRows(rows)); // 根据排过序的 rows json 数据，重新构建表格 table
+        $table3.children('tbody').html(buildRows(rows));
       });
     });
   });
