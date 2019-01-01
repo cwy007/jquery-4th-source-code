@@ -1,18 +1,18 @@
-$(document).ready(function() {
+$(document).ready(function () {
   var $ajaxForm = $('#ajax-form'),
-      $response = $('#response'),
-      noresults = 'There were no search results.',
-      failed = 'Sorry, but the request could not ' +
-        'reach its destination. Try again later.';
+    $response = $('#response'),
+    noresults = 'There were no search results.',
+    failed = 'Sorry, but the request could not ' +
+    'reach its destination. Try again later.';
 
-  var buildItem = function(item) {
+  var buildItem = function (item) {
     var title = item.name,
-        args = [],
-        output = '<li>';
+      args = [],
+      output = '<li>';
 
     if (item.type == 'method' || !item.type) {
       if (item.signatures[0].params) {
-        $.each(item.signatures[0].params, function(index, val) {
+        $.each(item.signatures[0].params, function (index, val) {
           args.push(val.name);
         });
       }
@@ -28,11 +28,11 @@ $(document).ready(function() {
     return output;
   };
 
-  var response = function(json) {
+  var response = function (json) {
     var output = '';
     if (json && json.length) {
       output += '<ol>';
-      $.each(json, function(index, val) {
+      $.each(json, function (index, val) {
         output += buildItem(val);
       });
       output += '</ol>';
@@ -43,25 +43,25 @@ $(document).ready(function() {
     $response.html(output);
   };
 
-  $ajaxForm.on('submit', function(event) {
+  $ajaxForm.on('submit', function (event) {
     event.preventDefault();
 
     $response.addClass('loading').empty();
 
     $.ajax({
-      url: 'http://book.learningjquery.com/api/',
-      dataType: 'jsonp',
-      data: {
-        title: $('#title').val()
-      },
-      timeout: 15000
-    })
-    .done(response)
-    .fail(function() {
-      $response.html(failed);
-    })
-    .always(function() {
-      $response.removeClass('loading');
-    });
+        url: 'http://book.learningjquery.com/api/',
+        dataType: 'jsonp',
+        data: {
+          title: $('#title').val()
+        },
+        timeout: 15000
+      })
+      .done(response)
+      .fail(function () {
+        $response.html(failed);
+      })
+      .always(function () {
+        $response.removeClass('loading');
+      });
   });
 });

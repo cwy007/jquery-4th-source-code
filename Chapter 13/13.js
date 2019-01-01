@@ -46,16 +46,22 @@ $(document).ready(function () {
   $ajaxForm.on('submit', function (event) {
     event.preventDefault();
 
+    $response.addClass('loading').empty();
+
     $.ajax({
-      url: 'http://book.learningjquery.com/api/',
-      dataType: 'jsonp',
-      data: {
-        title: $('#title').val()
-      },
-      success: response,
-      error: function () {
+        url: 'http://book.learningjquery.com/api/',
+        dataType: 'jsonp',
+        data: {
+          title: $('#title').val()
+        },
+        timeout: 15000
+      })
+      .done(response)
+      .fail(function () {
         $response.html(failed);
-      }
-    });
+      })
+      .always(function () {
+        $response.removeClass('loading');
+      });
   });
 });
