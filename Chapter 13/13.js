@@ -4,7 +4,9 @@ $(document).ready(function () {
     noresults = 'There were no search results.',
     failed = 'Sorry, but the request could not ' +
     'reach its destination. Try again later.',
-    api = {};
+    api = {},
+    searchTimeout,
+    searchDelay = 300;
 
   var buildItem = function (item) {
     var title = item.name,
@@ -71,5 +73,12 @@ $(document).ready(function () {
     }).always(function () {
       $response.removeClass('loading');
     });
+  });
+
+  $('#title').on('keyup', function (event) {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(function () {
+      $ajaxForm.triggerHandler('submit');
+    }, searchDelay);
   });
 });
