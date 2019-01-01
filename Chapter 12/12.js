@@ -11,20 +11,22 @@ $(document).ready(function () {
   $headers.on('click', function (event) {
     event.preventDefault();
     var column = $(this).index();
-    var rows = $table1.find('tbody > tr').get(); // get() 没有指定参数，和指定参数时效果不一样
-    rows.sort(function (a, b) {
-      var keyA = $(a).children('td').eq(column).text(); // eq()
-      keyA = $.trim(keyA).toUpperCase(); // $.trim(), es5 中也包含这个方法 string.trim()
-      var keyB = $(b).children('td').eq(column).text();
-      keyB = $.trim(keyB).toUpperCase(); // toUpperCase() javascript 方法
 
+    var rows = $table1.find('tbody > tr').each(function () {
+      var key = $(this).children('td').eq(column).text();
+      $(this).data('sortKey', $.trim(key).toUpperCase());
+    }).get();
+
+    rows.sort(function (a, b) {
+      var keyA = $(a).data('sortKey');
+      var keyB = $(b).data('sortKey');
       if (keyA < keyB) return -1;
       if (keyA > keyB) return 1;
       return 0;
     });
 
     $.each(rows, function (index, row) {
-      $table1.children('tbody').append(row); // append()
+      $table1.children('tbody').append(row);
     });
   });
 });

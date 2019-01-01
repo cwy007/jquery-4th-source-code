@@ -24,7 +24,7 @@ $(document).ready(function () {
     });
 
     $.each(rows, function (index, row) {
-      $table1.children('tbody').append(row); // append()
+      $table1.children('tbody').append(row); // append() 移动排好序的dom节点，这个方法会移动 dom 节点
     });
   });
 });
